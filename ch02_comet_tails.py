@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+
+"""
+Chapter 2 - Comet Tails
+
+'Astrophysics with a PC' by Paul Hellings, ISBN 943396-43-3
+Copyright (c) 1994 Paul Hellings. All rights reserved.
+
+Python version of the book's QuickBasic source
+by Carlos da Costa https://github.com/cdacos (2014-02-02)
+"""
+
 from __future__ import print_function
 import math
 
