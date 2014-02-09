@@ -17,6 +17,7 @@ According to Table 3-1 should produce:
 1.45 28.9885 102.0126 19.93035 -39.87487 0.0049890  2.17
 1.60 31.9708  96.0459 19.80846 -39.63245 0.0014891  2.05
 1.70 33.9402  92.1055 19.50003 -39.01633 0.0000793  3.69
+This is not what this program outputs. No explanation yet.
 """
 
 from __future__ import print_function, division
