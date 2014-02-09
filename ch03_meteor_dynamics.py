@@ -8,6 +8,15 @@ Copyright (c) 1994 Paul Hellings. All rights reserved.
 
 Python version of the book's QuickBasic source
 by Carlos da Costa https://github.com/cdacos (2014-02-07)
+
+Example:
+$ python ch03_meteor_dynamics.py 160 20 40 0.01 1 1.1e-11 0.02
+According to Table 3-1 should produce:
+0.10  2.0000 156.0000 19.99999 -40.00095 0.0099986 10.77
+1.00 19.9992 119.9968 19.99488 -39.99956 0.0095010  4.77
+1.45 28.9885 102.0126 19.93035 -39.87487 0.0049890  2.17
+1.60 31.9708  96.0459 19.80846 -39.63245 0.0014891  2.05
+1.70 33.9402  92.1055 19.50003 -39.01633 0.0000793  3.69
 """
 
 from __future__ import print_function, division
@@ -19,7 +28,7 @@ def datm(y):
   """
   return exp(-6.65125 - 1.39813e-6 * y)
 
-def effes(u, v, m, k1, k2, tau):
+def effes(u, v, m, k1, k2):
   """Computes fx, fy, fu, fv, fm and s (the speed) for a position (x,y)
   velocity (u,v) and mass (m), and with parameters k1,k2 and tau
   """
@@ -74,7 +83,7 @@ while m >= minit * .01: # This is the main loop of the program
   t = t + dt
 
   # next line computes right hand sides of the 5 differential equations (state i)
-  fx, fy, fu, fv, fm, s = effes(u, v, m, k1, k2, tau)
+  fx, fy, fu, fv, fm, s = effes(u, v, m, k1, k2)
 
   # next 5 instructions compute the predicted state 'i+1
   x1 = x + dt * fx
@@ -84,7 +93,7 @@ while m >= minit * .01: # This is the main loop of the program
   m1 = m + dt * fm
 
   # next line computes rigt hand sides of the 5 differential equations (state 'i+1)
-  fx1, fy1, fu1, fv1, fm1, s1 = effes(u1, v1, m1, k1, k2, tau)
+  fx1, fy1, fu1, fv1, fm1, s1 = effes(u1, v1, m1, k1, k2)
 
   # next 5 instructions compute the correct state at 'i+1
   x = x + .5 * dt * (fx + fx1)
