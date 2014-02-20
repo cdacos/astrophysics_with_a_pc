@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Chapter 3 - Meteor Dynamics
+Chapter 4 - The Restricted Three-Body Problem
 
 'Astrophysics with a PC' by Paul Hellings, ISBN 943396-43-3
 Copyright (c) 1994 Paul Hellings. All rights reserved.
@@ -54,10 +54,10 @@ print('')
 print('Input of initial conditions and parameters : ')
 print('')
 mu = start_parameter('Mass parameter mu         : ', 1)
-x  = start_parameter('Initial conditions : x(o) : ', 2)
-y  = start_parameter('                     y(o) : ', 3)
-u  = start_parameter('                     u(o) : ', 4)
-v  = start_parameter('                     v(o) : ', 5)
+x  = start_parameter('Initial conditions : x(0) : ', 2)
+y  = start_parameter('                     y(0) : ', 3)
+u  = start_parameter('                     u(0) : ', 4)
+v  = start_parameter('                     v(0) : ', 5)
 dt = start_parameter('Time step                 : ', 6)
 
 t = dt
