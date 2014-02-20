@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Chapter 5 - Equipotential Surfaces of the Two-Body Problem
+Chapter 6 - The Dynamical Parallax
 
 'Astrophysics with a PC' by Paul Hellings, ISBN 943396-43-3
 Copyright (c) 1994 Paul Hellings. All rights reserved.
