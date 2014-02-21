@@ -10,7 +10,11 @@ Python version of the book's QuickBasic source
 by Carlos da Costa https://github.com/cdacos (2014-02-20)
 
 Examples:
-$ python ch07_polytropes.py 1.5 .05 2 3
+$ python ch08_stellar_model.py 10
+
+2014-02-20 Carlos: log(E) for i > 16 is deliberately 0 in this text ("ee is 
+  put to 1") but Table 8-2 in the text has the value set to that calculated
+  for i = 16 (1.3812).
 """
 
 from __future__ import print_function, division
@@ -20,7 +24,6 @@ from math import fabs, exp, sqrt, log, pow, log10, pi
 def e(d, t):
   """ computes the energy production for given density d and temperature t
   """
-  print(t)
   tt = exp(1 / 3.0 * log(t / 1e9))
   p1 = 1 + tt * ( .133 + tt * (1.09 + tt * .938))
   p2 = 1 + tt * (.027 + tt * (-.788 + tt * (-.149 + tt * (.261 + tt * .127))))
@@ -64,11 +67,11 @@ print('--------------------------------------------------------')
 print('')
 print('-------Minimal solution program--------')
 print('')
-mtot = start_parameter('Input parameter : Approximation; of; total; mass(2 - 15) : ', 1)
+mtot = start_parameter('Input parameter : Approximation of total mass (2 - 15) : ', 1)
 print('')
 
 # show heading of main table
-print('i    Mr/Mo   log(p)   log(T)    log(d)   r/r0   log(E)    log(L)   x   f   h')
+print('i    Mr/Mo    log(p)   log(T)   log(d)   r/r0     log(E)   log(L)     x        f        h')
 
 w = log10(mtot)
 
@@ -76,6 +79,7 @@ w = log10(mtot)
 tc = 7.23937 + .2724354 * w - .0401771 * w * w
 tc = pow(10, tc)
 dc = 2.27899 - 1.658707 * w + .29329095 * w * w
+dc = pow(10, dc)
 
 # compute the value of the fitmass :
 if mtot < 4:
@@ -102,11 +106,11 @@ f = 1.0
 h = .0
 m = .0
 r = .0
-l = 10.0
+l = l0
 [p, d, m, r] = poly(n, x, f, h, ptc, dc, rn)
 
 # print first line of table (central value)
-print('{:2d} {: 8.5f} {: 7.4f} {: 7.4f} {: 8.4f} {: 7.4f} {: 7.3f} {: 7.3f} {: 7.3f} {: 7.3f} {: 7.3f}'.format(i, m / m0, log10(p), log10(tc), log10(d), r / r0, log10(eec), log10(1 / 10.0), x, f, h))
+print('{:2d} {: 9.5f} {: 8.4f} {: 7.4f} {: 8.4f} {: 8.5f} {: 8.4f} {: 8.4f} {: 8.4f} {: 8.4f} {: 8.4f}'.format(i, m / m0, log10(p), log10(tc), log10(d), r / r0, log10(eec), log10(l / l0), x, f, h))
 
 # compute and show first step
 i = 1
@@ -120,10 +124,10 @@ t = temp(mu, p, d)
 ee = e(d, t)
 dr = dx * rn
 l = 4 / 3.0 * pi * dc * eec * pow(dr, 3)
-print('{:2d} {: 8.5f} {: 7.4f} {: 7.4f} {: 8.4f} {: 7.4f} {: 7.3f} {: 7.3f} {: 7.3f} {: 7.3f} {: 7.3f}'.format(i, m / m0, log10(p), log10(tc), log10(d), r / r0, log10(eec), log10(1 / 10.0), x, f, h))
+print('{:2d} {: 9.5f} {: 8.4f} {: 7.4f} {: 8.4f} {: 8.5f} {: 8.4f} {: 8.4f} {: 8.4f} {: 8.4f} {: 8.4f}'.format(i, m / m0, log10(p), log10(t), log10(d), r / r0, log10(ee), log10(l / l0), x, f, h))
 
 # Start of main cycle
-
+surface = 0
 i = 2
 for zone in range(1, 3):  # zone = 1 during convective region
                           #      = 2 during radiative region
@@ -167,7 +171,8 @@ for zone in range(1, 3):  # zone = 1 during convective region
           ee = 1
 
         # show results of layer i+1 on screen
-        print('{:2d} {: 8.5f} {: 7.4f} {: 7.4f} {: 8.4f} {: 7.4f} {: 7.3f} {: 7.3f} {: 7.3f} {: 7.3f} {: 7.3f}'.format(i, m / m0, log10(p), log10(tc), log10(d), r / r0, log10(eec), log10(1 / 10.0), x, f, h))
+        print('{:2d} {: 9.5f} {: 8.4f} {: 7.4f} {: 8.4f} {: 8.5f} {: 8.4f} {: 8.4f} {: 8.4f} {: 8.4f} {: 8.4f}'.format(i, m / m0, log10(p), log10(t), log10(d), r / r0, log10(ee), log10(l / l0), x, f, h))
+        i = i + 1
       else:
         surface = 1 # surface has been reached
     else:
@@ -188,7 +193,7 @@ for zone in range(1, 3):  # zone = 1 during convective region
         rn = sqrt(ptc / pi / g / pow(dc, 2))
         x = r / rn
         h = -m / 4.0 / pi / dc / pow(rn, 3) / pow(x, 2)
-        n = 3
+        n = 3.0
         dx = .04
         stp = 1
         surface = 0
@@ -196,40 +201,40 @@ for zone in range(1, 3):  # zone = 1 during convective region
         # show fitting parameters
         print('')
         print('---------- Fitting parameters -----------')
-        print('New centr.press.    : {:8.5f}'.format(ptc))
-        print('New centr.density   : {:8.5f}'.format(dc))
-        print('xfit                : {:8.5f}'.format(x))
-        print('ffit                : {:8.5f}'.format(ffit))
-        print('hfit                : {:8.5f}'.format(h))
-        print('new rn              : {:8.5f}'.format(rn))
+        print('New centr.press.    : {: 9.7e}'.format(ptc))
+        print('New centr.density   : {: 9.7f}'.format(dc))
+        print('xfit                : {: 9.7f}'.format(x))
+        print('ffit                : {: 9.7f}'.format(ffit))
+        print('hfit                : {: 9.7f}'.format(h))
+        print('new rn              : {: 9.7e}'.format(rn))
         print('')
 
         raw_input('Press Enter to continue')
         print('')
 
-      # next else is entered when in radiative zone
-      else:
-        dx = 1.1 * dx
+    # next else is entered when in radiative zone
+    else:
+      dx = 1.1 * dx
 
-        # check if surface is reached
-        if surface == 1:
+      # check if surface is reached
+      if surface == 1:
 
-          # compute exact location of surface and surface data
-          stp = 1
-          xs = x - flast / h
-          mt = m + .5 * pi * d * pow(rn, 3) * pow(x + xs, 2)
-          rad = r + rn * (xs - x)
-          logteff = 3.7613 + .25 * log10(1 / 10.0) - .5 * log10(rad / r0)
+        # compute exact location of surface and surface data
+        stp = 1
+        xs = x - flast / h
+        mt = m + .5 * pi * d * pow(rn, 3) * pow(x + xs, 2)
+        rad = r + rn * (xs - x)
+        logteff = 3.7613 + .25 * log10(l / l0) - .5 * log10(rad / r0)
 
-          raw_input('Press Enter to continue')
-          print('')
+        raw_input('Press Enter to continue')
+        print('')
 
-          # print surface data
-          print('----------------- surface data -----------------')
-          print('Mass (in Mo)           : {: 7.2f}'.format(mt / m0))
-          print('radius (Ro)            : {: 7.2f}'.format(rad / ro))
-          print('Luminosity (log(L/Lo)) : {: 7.2f}'.format(log10(1 / 10.0)))
-          print('Effect.temp.(log)      : {: 7.2f}'.format(logteff))
+        # print surface data
+        print('----------------- surface data -----------------')
+        print('Mass (in Mo)           : {: 7.2f}'.format(mt / m0))
+        print('radius (Ro)            : {: 7.2f}'.format(rad / r0))
+        print('Luminosity (log(L/Lo)) : {: 7.2f}'.format(log10(l / l0)))
+        print('Effect.temp.(log)      : {: 7.2f}'.format(logteff))
 
 
 
