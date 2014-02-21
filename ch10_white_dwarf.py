@@ -15,7 +15,7 @@ $ python ch10_white_dwarf.py 8 80
 
 from __future__ import print_function, division
 from helpers import start_parameter
-from math import fabs, exp, sqrt, log, pow, log10#, pi
+from math import fabs, exp, sqrt, log, pow, log10, pi
 
 def density(p, xold, rho, xnew):
   """ computes the density rho and the correspondingvalsue xnew from the
@@ -57,7 +57,6 @@ g = 6.673e-8
 m0 = 2e33
 r0 = 6.96e10
 a = 6.01e22
-pi = 3.1415926536
 
 print('Astrophysics with a PC : WHITE DWARF')
 print('--------------------------------------------------------')
