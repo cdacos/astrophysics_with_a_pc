@@ -6,9 +6,9 @@ As taken from:
 (Copyright (c) 1994 Paul Hellings. All rights reserved.)
 
 The programs in this project are literal translations of the QuickBasic code examples at the end of each chapter. 
-They're made available so that the text can be followed using a more common language as of 2014 (Python).
+They're made available so that the text can be followed using a more common language as of 2014 (python).
 
-The code samples have been tested using 2.7.5 and compared with the sample data provided.
+The code samples have been tested using python 2.7.5 and compared with the sample data provided.
 
 How to use
 ---------
