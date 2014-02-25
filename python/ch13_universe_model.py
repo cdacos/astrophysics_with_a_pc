@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Chapter 13 - Cosmological Models ofr the Universe
+Chapter 13 - Cosmological Models for the Universe
 
 'Astrophysics with a PC' by Paul Hellings, ISBN 943396-43-3
 Copyright (c) 1994 Paul Hellings. All rights reserved.
