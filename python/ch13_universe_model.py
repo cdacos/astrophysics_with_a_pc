@@ -17,7 +17,7 @@ from __future__ import print_function, division
 from helpers import start_parameter
 from math import fabs, exp, sqrt, log, pow, log10, pi, sin, tan, cos
 
-print('Astrophysics with a PC :UNIVWRSE MODEL')
+print('Astrophysics with a PC : UNIVERSE MODEL')
 print('--------------------------------------------------------')
 print('')
 print('-------Minimal solution program--------')
